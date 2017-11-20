@@ -4,7 +4,6 @@ node {
       checkout scm
     }
     stage('prepare') {
-      whoami
       sh "git clean -fdx"
     }
     stage('compile') {

@@ -13,7 +13,7 @@ node {
       sh "./test_hello.sh"
     }
     stage('package') {
-      sh "tar -cvzf hello.tar.gz hello.sh"
+      sh hello.sh
     }
     stage('publish') {
       echo "uploading package..."

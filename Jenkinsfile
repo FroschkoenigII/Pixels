@@ -10,10 +10,10 @@ node {
       echo "nothing to compile for hello.sh..."
     }
     stage('test') {
-      sh "./test_hello.sh"
+      sh hello.sh
     }
     stage('package') {
-      sh hello.sh
+      sh "tar -cvzf hello.tar.gz hello.sh"
     }
     stage('publish') {
       echo "uploading package..."

@@ -17,7 +17,7 @@ public void testFuntction()
 public void WorkingTest()
 {
 	int result = 3;
-	assertEquals(3,result);
+	assertEquals(2,result);
 	}
 
 }

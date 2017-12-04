@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>WebServer</module>
+		<module>TestReportReader</module>
 	</modules>	
 	<build>
 	<pluginManagement>

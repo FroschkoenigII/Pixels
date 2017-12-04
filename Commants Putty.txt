@@ -1,0 +1,7 @@
+Top / pid 	prozesse
+jps -v 		aktuelle java prozesse
+mv		move
+cp		copy
+kill 		pill pid
+whoami		aktueller user
+pwd		aktueller ort

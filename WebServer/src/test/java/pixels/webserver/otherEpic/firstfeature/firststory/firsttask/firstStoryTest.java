@@ -1,4 +1,4 @@
-package pixels.webserver.stepFeature;
+package pixels.webserver.otherEpic.firstfeature.firststory.firsttask;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,13 +7,13 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class WhenStepScenatios {
+public class firstStoryTest {
 
 	@Steps
 	SomeSteps ss;
 	
 	@Test
-	public void Scenatio1()
+	public void firstStoryScenatio1()
 	{
 		ss.doSomeOtherStep();
 		ss.doSomeStepThatIncludesOtherSteps();
@@ -21,7 +21,7 @@ public class WhenStepScenatios {
 	}
 	
 	@Test
-	public void Scenatio2()
+	public void firstStoryScenatio2()
 	{
 		ss.doSomeStep();
 		ss.doSomeStep();
@@ -29,7 +29,7 @@ public class WhenStepScenatios {
 	}
 	
 	@Test
-	public void ScenatioWithError()
+	public void firstStoryScenatioWithError()
 	{
 		ss.doSomeOtherStep();
 		ss.doSomeStepThatIncludesOtherSteps();

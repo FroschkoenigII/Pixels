@@ -1,0 +1,4 @@
+Example "someEpic" Epic
+
+Narrative:
+The description of the epic could be done here.

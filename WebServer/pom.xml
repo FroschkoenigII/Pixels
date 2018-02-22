@@ -84,14 +84,6 @@
 			<artifactId>jgiven-junit</artifactId>
 			<version>0.15.3</version>
 			<scope>test</scope>
-<<<<<<< HEAD
-=======
-		</dependency>
-		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>core</artifactId>
-			<version>${serenity.version}</version>
->>>>>>> refs/remotes/origin/master
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

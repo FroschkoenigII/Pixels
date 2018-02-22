@@ -48,26 +48,21 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
-				<groupId>net.serenity-bdd.maven.plugins</groupId>
-				<artifactId>serenity-maven-plugin</artifactId>
-				<version>${serenity.maven.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>net.serenity-bdd</groupId>
-						<artifactId>core</artifactId>
-						<version>${serenity.version}</version>
-					</dependency>
-				</dependencies>
+				<groupId>com.tngtech.jgiven</groupId>
+				<artifactId>jgiven-maven-plugin</artifactId>
+				<version>0.15.3</version>
 				<executions>
 					<execution>
-						<id>serenity-reports</id>
-						<phase>post-integration-test</phase>
 						<goals>
-							<goal>aggregate</goal>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<format>html</format>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -85,14 +80,10 @@
 	</pluginRepositories>
 	<dependencies>
 		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>core</artifactId>
-			<version>${serenity.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>serenity-junit</artifactId>
-			<version>${serenity.version}</version>
+			<groupId>com.tngtech.jgiven</groupId>
+			<artifactId>jgiven-junit</artifactId>
+			<version>0.15.3</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -108,6 +99,21 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.jgiven</groupId>
+			<artifactId>jgiven-core</artifactId>
+			<version>0.15.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.jgiven</groupId>
+			<artifactId>jgiven-html5-report</artifactId>
+			<version>0.15.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.jgiven</groupId>
+			<artifactId>jgiven-maven-plugin</artifactId>
+			<version>0.15.3</version>
 		</dependency>
 	</dependencies>
 	<parent>

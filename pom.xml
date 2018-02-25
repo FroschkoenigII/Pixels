@@ -9,7 +9,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>WebServer</module>
-		
+
+		<module>Client</module>
 	</modules>	
 	<build>
 	<pluginManagement>

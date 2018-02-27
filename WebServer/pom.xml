@@ -64,6 +64,23 @@
 					<format>html</format>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>au.com.dius</groupId>
+				<artifactId>pact-jvm-provider-maven_2.12</artifactId>
+				<version>3.3.8</version>
+				<configuration>
+					<serviceProviders>
+						<serviceProvider>
+							<name>test_provuider</name>
+							<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
+						</serviceProvider>
+					</serviceProviders>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
@@ -73,6 +90,10 @@
 		</repository>
 	</repositories>
 	<pluginRepositories>
+		<pluginRepository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</pluginRepository>
 		<pluginRepository>
 			<id>spring-releases</id>
 			<url>https://repo.spring.io/libs-release</url>
@@ -114,6 +135,11 @@
 			<groupId>com.tngtech.jgiven</groupId>
 			<artifactId>jgiven-maven-plugin</artifactId>
 			<version>0.15.3</version>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-provider-junit_2.12</artifactId>
+			<version>3.5.13</version>
 		</dependency>
 	</dependencies>
 	<parent>

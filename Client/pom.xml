@@ -15,9 +15,8 @@
 		</dependency>
 		<dependency>
 			<groupId>au.com.dius</groupId>
-			<artifactId>pact-jvm-consumer-junit_2.11</artifactId>
-			<version>3.3.6</version>
-			<scope>test</scope>
+			<artifactId>pact-jvm-consumer-junit_2.12</artifactId>
+			<version>3.5.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -30,6 +29,12 @@
 			<version>1.5.10.RELEASE</version>
 		</dependency>
 	</dependencies>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -38,20 +43,28 @@
 				<version>2.18</version>
 				<configuration>
 					<systemPropertyVariables>
-						<pact.rootDir>pacts</pact.rootDir>
-						<buildDirectory>${project.build.directory}</buildDirectory>
+						<pact.rootDir>target/pacts</pact.rootDir>
+						<buildDirectory>${project.build.directory}/target</buildDirectory>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>au.com.dius</groupId>
-				<artifactId>pact-jvm-provider-maven_2.11</artifactId>
-				<version>3.3.4</version>
-				<configuration>
-					<pactDirectory>pacts</pactDirectory>
-					<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
-					<projectVersion>1.0.1</projectVersion>
-				</configuration>
+				<groupId>com.github.warmuuh</groupId>
+				<artifactId>pactbroker-maven-plugin</artifactId>
+				<version>0.0.10</version>
+				<executions>
+					<execution>
+						<id>upload-pacts</id>
+						<phase>test</phase>
+						<goals>
+							<goal>upload-pacts</goal>
+						</goals>
+						<configuration>
+							<brokerUrl>http://localhost:80</brokerUrl>
+							<pacts>${project.build.directory}\pacts</pacts>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

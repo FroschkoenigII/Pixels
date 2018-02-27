@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.tomcat.jni.User;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +16,7 @@ import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 
-public class helloPactTest {
+public class GreetingServicePactTest {
 	
 	@Rule
     public PactProviderRuleMk2  provider = new PactProviderRuleMk2("exampleProvider","localhost",8020,this);
@@ -22,17 +24,18 @@ public class helloPactTest {
 	@Pact(provider = "exampleProvider", consumer = "exampleConsumer")
     public RequestResponsePact createFragment(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("content-type", "text/plain");
+        headers.put("content-type", "application/json");
 
         return builder
                 .given("default")
-                .uponReceiving("HelloRequest")
-                .path("/")
+                .uponReceiving("GreetingWithQueryTest")
+                .path("/greeting")
+                .query("name=TestName")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
                 .headers(headers)
-                .body("Greetings from Spring Boot!")
+                .body("{\"id\":1,\"content\": \"Hello, TestName!\"}")
                 .toPact();
     }
 	
@@ -41,9 +44,9 @@ public class helloPactTest {
     public void runTest() throws IOException {
         final RestTemplate call = new RestTemplate();
         //final Greeting expectedResponse = new Greeting(1, "Hello, sven!");
-        String expectedResult = "Greetings from Spring Boot!";
-        final String forEntity = call.getForObject(provider.getConfig().url() + "/", String.class);
-        org.junit.Assert.assertEquals(expectedResult,forEntity);
+        String expectedResult = "{\"id\":1,\"content\": \"Hello, TestName!\"}";
+        final String forEntity = call.getForObject(provider.getConfig().url() + "/greeting?name=TestName", String.class);
+       // org.junit.Assert.assertEquals(expectedResult,forEntity);
 
     }
 }

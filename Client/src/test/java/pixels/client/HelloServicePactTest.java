@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.tomcat.jni.User;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +14,7 @@ import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 
-public class exampleFunctionTest {
+public class HelloServicePactTest {
 	
 	@Rule
     public PactProviderRuleMk2  provider = new PactProviderRuleMk2("exampleProvider","localhost",8020,this);
@@ -24,18 +22,17 @@ public class exampleFunctionTest {
 	@Pact(provider = "exampleProvider", consumer = "exampleConsumer")
     public RequestResponsePact createFragment(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("content-type", "application/json");
+        headers.put("content-type", "text/plain");
 
         return builder
                 .given("default")
-                .uponReceiving("GreetingWithQueryTest")
-                .path("/greeting")
-                .query("name=sven")
+                .uponReceiving("HelloRequest")
+                .path("/")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
                 .headers(headers)
-                .body("{\"id\":1,\"content\": \"Hello, sven!\"}")
+                .body("Greetings from Spring Boot!")
                 .toPact();
     }
 	
@@ -44,9 +41,9 @@ public class exampleFunctionTest {
     public void runTest() throws IOException {
         final RestTemplate call = new RestTemplate();
         //final Greeting expectedResponse = new Greeting(1, "Hello, sven!");
-        String expectedResult = "{\"id\":1,\"content\": \"Hello, sven!\"}";
-        final String forEntity = call.getForObject(provider.getConfig().url() + "/greeting?name=sven", String.class);
-       // org.junit.Assert.assertEquals(expectedResult,forEntity);
+        String expectedResult = "Greetings from Spring Boot!";
+        final String forEntity = call.getForObject(provider.getConfig().url() + "/", String.class);
+        org.junit.Assert.assertEquals(expectedResult,forEntity);
 
     }
 }

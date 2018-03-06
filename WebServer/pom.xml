@@ -5,13 +5,9 @@
 
 	<groupId>Pixels</groupId>
 	<artifactId>Webserver</artifactId>
-	<version>0.1.1</version>
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<serenity.version>1.0.47</serenity.version>
-		<serenity.maven.version>1.0.47</serenity.maven.version>
-		<webdriver.driver>firefox</webdriver.driver>
 	</properties>
 	<build>
 		<plugins>
@@ -32,7 +28,6 @@
 					</includes>
 					<systemProperties>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
-						<surefire.rerunFailingTestsCount>${surefire.rerunFailingTestsCount}</surefire.rerunFailingTestsCount>
 						<surefire.rerunFailingTestsCount>${surefire.rerunFailingTestsCount}</surefire.rerunFailingTestsCount>
 					</systemProperties>
 				</configuration>
@@ -65,17 +60,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>au.com.dius</groupId>
 				<artifactId>pact-jvm-provider-maven_2.12</artifactId>
-				<version>3.3.8</version>
+				<version>3.5.11</version>
 				<configuration>
 					<serviceProviders>
 						<serviceProvider>
-							<name>test_provuider</name>
+							<name>exampleProvider</name>
 							<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
 						</serviceProvider>
 					</serviceProviders>
@@ -89,17 +80,12 @@
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-releases</id>
-			<url>https://repo.spring.io/libs-release</url>
-		</pluginRepository>
-	</pluginRepositories>
 	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.tngtech.jgiven</groupId>
 			<artifactId>jgiven-junit</artifactId>
@@ -145,6 +131,6 @@
 	<parent>
 		<groupId>Pixel</groupId>
 		<artifactId>Main</artifactId>
-		<version>0.1.0</version>
+		<version>1.1.0</version>
 	</parent>
 </project>

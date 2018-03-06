@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Pixel</groupId>
 	<artifactId>Main</artifactId>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>WebServer</module>
-
 		<module>Client</module>
+		<module>OtherClient</module>
+		<module>WebServer</module>
 	</modules>
 	<build>
 		<pluginManagement>

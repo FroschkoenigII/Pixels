@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 
@@ -26,16 +27,20 @@ public class GreetingServicePactTest {
         Map<String, String> headers = new HashMap<>();
         headers.put("content-type", "application/json");
 
+        PactDslJsonBody body = new PactDslJsonBody()
+        	    .id()
+        	    .stringType("content");
+        
         return builder
                 .given("default")
-                .uponReceiving("GreetingWithQueryTest")
+                .uponReceiving("GreetingWithQuery")
                 .path("/greeting")
                 .query("name=TestName")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
                 .headers(headers)
-                .body("{\"id\":1,\"content\": \"Hello, TestName!\"}")
+                .body(body)
                 .toPact();
     }
 	

@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.google.gson.Gson;
-
 import scala.util.parsing.json.JSON;
 
 public class PactLocalizer {
@@ -24,8 +21,9 @@ public class PactLocalizer {
 
 	private static final String providerName = "exampleProvider";
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
+		
 		JSONObject pactLocations = readJsonFromURL(PACTURL);
 
 		JSONObject pacts = pactLocations.getJSONObject("_links");
@@ -34,19 +32,18 @@ public class PactLocalizer {
 		pactss.forEach(p -> {
 			try {
 				generatePact(p);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 
-
 	}
 
-	private static void generatePact(Object p) throws IOException {
+	private static void generatePact(Object p) throws Exception {
 		JSONObject jo = (JSONObject) p;
 		String consumerName = (String) jo.get("name");
 		String pactURL = (String) jo.get("href");
-		JSONObject finalPact = readJsonFromURL(pactURL);
+		JSONObject finalPact = sendGet(pactURL,true);
 		writeToFile(finalPact, consumerName);
 	}
 
@@ -60,27 +57,24 @@ public class PactLocalizer {
 
 	private static JSONObject readJsonFromURL(String URL) throws IOException {
 		URL address = new URL(URL);
-		HttpURLConnection  hc = (HttpURLConnection) address.openConnection();
+		HttpURLConnection hc = (HttpURLConnection) address.openConnection();
 
-	        hc.setDoOutput(true);
-	        hc.setDoInput(true);
-	        hc.setUseCaches(false);
-	        hc.setRequestMethod("GET");
-	        hc.setRequestProperty("Content-Type", "application/json");
-	        String ss = hc.getResponseMessage();
-	        InputStream is = new URL(URL).openStream();
+		hc.setDoOutput(true);
+		hc.setDoInput(true);
+		hc.setUseCaches(false);
+		hc.setRequestMethod("GET");
+		hc.setRequestProperty("Accept","application/json");
+		InputStream is = new URL(URL).openStream();
 		try {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
-			String tstring = new Gson().toJson(jsonText);
-
 			JSONObject json = new JSONObject(jsonText);
 			return json;
 		} finally {
 			is.close();
 		}
 	}
-
+	
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -88,6 +82,35 @@ public class PactLocalizer {
 			sb.append((char) cp);
 		}
 		return sb.toString();
+	}
+
+	// HTTP GET request
+	private static JSONObject sendGet(String url,boolean JSONHeader) throws Exception {
+		
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		// optional default is GET
+		con.setRequestMethod("GET");
+		// add request header
+		if(JSONHeader)
+		con.setRequestProperty("Accept","application/json");
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+		JSONObject json = new JSONObject(response);
+		return json;
+
+
 	}
 
 }

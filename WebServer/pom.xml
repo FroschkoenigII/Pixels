@@ -73,7 +73,7 @@
 					<packageWithBaseClasses>pixels.webserver.hello</packageWithBaseClasses>
 					<baseClassMappings>
 						<baseClassMapping>
-							<baseClassFQN>pixels.webserver.hello</baseClassFQN>
+							<baseClassFQN>pixels.webserver.hello.MvcTest</baseClassFQN>
 						</baseClassMapping>
 					</baseClassMappings>
 				</configuration>

@@ -48,7 +48,7 @@ public class PactLocalizer {
 	}
 
 	private static void writeToFile(JSONObject finalPact, String consumerName) throws IOException {
-		try (FileWriter file = new FileWriter("target/pact/contracts/" + consumerName + "-" + providerName + ".json")) {
+		try (FileWriter file = new FileWriter("C:/ESD/" + consumerName + "-" + providerName + ".json")) {
 			file.write(finalPact.toString());
 			System.out.println("Successfully Copied JSON Object to File...");
 		}
@@ -107,7 +107,7 @@ public class PactLocalizer {
 			response.append(inputLine);
 		}
 		in.close();
-		JSONObject json = new JSONObject(response);
+		JSONObject json = new JSONObject(response.toString());
 		return json;
 
 

@@ -9,6 +9,9 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -17,19 +20,17 @@ import scala.util.parsing.json.JSON;
 
 public class PactLocalizer {
 
-	private static final String PACTURL = "http://localhost/pacts/provider/exampleProvider/latest";
+	private static final String PACTURL = "http://localhost";
 
-	private static final String providerName = "exampleProvider";
+	private static final String PROVIDERNAME = "exampleProvider";
 
 	public static void main(String[] args) throws Exception {
 
-		
-		JSONObject pactLocations = readJsonFromURL(PACTURL);
+		String constructedURL = PACTURL + "/pacts/provider/" + PROVIDERNAME + "/latest";
 
-		JSONObject pacts = pactLocations.getJSONObject("_links");
+		JSONArray jsonPacts = getPactsAsJson(constructedURL);
 
-		JSONArray pactss = pacts.getJSONArray("pacts");
-		pactss.forEach(p -> {
+		jsonPacts.forEach(p -> {
 			try {
 				generatePact(p);
 			} catch (Exception e) {
@@ -39,16 +40,25 @@ public class PactLocalizer {
 
 	}
 
+	private static JSONArray getPactsAsJson(String constructedURL) throws IOException {
+		JSONObject pactLocations = readJsonFromURL(constructedURL);
+		JSONObject pacts = pactLocations.getJSONObject("_links");
+		JSONArray jsonPacts = pacts.getJSONArray("pacts");
+		return jsonPacts;
+	}
+
 	private static void generatePact(Object p) throws Exception {
 		JSONObject jo = (JSONObject) p;
 		String consumerName = (String) jo.get("name");
 		String pactURL = (String) jo.get("href");
-		JSONObject finalPact = sendGet(pactURL,true);
+		JSONObject finalPact = sendGet(pactURL, true);
 		writeToFile(finalPact, consumerName);
 	}
 
 	private static void writeToFile(JSONObject finalPact, String consumerName) throws IOException {
-		try (FileWriter file = new FileWriter("C:/ESD/" + consumerName + "-" + providerName + ".json")) {
+		
+		try (FileWriter file = new FileWriter("src/main/resources/contracts/" + consumerName + "-" + PROVIDERNAME + "-"
+				+ ".json")) {
 			file.write(finalPact.toString());
 			System.out.println("Successfully Copied JSON Object to File...");
 		}
@@ -63,7 +73,7 @@ public class PactLocalizer {
 		hc.setDoInput(true);
 		hc.setUseCaches(false);
 		hc.setRequestMethod("GET");
-		hc.setRequestProperty("Accept","application/json");
+		hc.setRequestProperty("Accept", "application/json");
 		InputStream is = new URL(URL).openStream();
 		try {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
@@ -74,7 +84,7 @@ public class PactLocalizer {
 			is.close();
 		}
 	}
-	
+
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -85,16 +95,16 @@ public class PactLocalizer {
 	}
 
 	// HTTP GET request
-	private static JSONObject sendGet(String url,boolean JSONHeader) throws Exception {
-		
+	private static JSONObject sendGet(String url, boolean JSONHeader) throws Exception {
+
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		// optional default is GET
 		con.setRequestMethod("GET");
 		// add request header
-		if(JSONHeader)
-		con.setRequestProperty("Accept","application/json");
+		if (JSONHeader)
+			con.setRequestProperty("Accept", "application/json");
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
@@ -109,7 +119,6 @@ public class PactLocalizer {
 		in.close();
 		JSONObject json = new JSONObject(response.toString());
 		return json;
-
 
 	}
 

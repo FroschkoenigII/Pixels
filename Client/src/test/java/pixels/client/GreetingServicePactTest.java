@@ -23,7 +23,7 @@ public class GreetingServicePactTest {
     public PactProviderRuleMk2  provider = new PactProviderRuleMk2("exampleProvider","localhost",8020,this);
 	
 	@Pact(provider = "exampleProvider", consumer = "exampleConsumer")
-    public RequestResponsePact createFragment(PactDslWithProvider builder) {
+    public RequestResponsePact createPact(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
         headers.put("content-type", "application/json");
 
@@ -48,10 +48,6 @@ public class GreetingServicePactTest {
     @PactVerification("exampleProvider")
     public void runTest() throws IOException {
         final RestTemplate call = new RestTemplate();
-        //final Greeting expectedResponse = new Greeting(1, "Hello, sven!");
-        String expectedResult = "{\"id\":1,\"content\": \"Hello, TestName!\"}";
         final String forEntity = call.getForObject(provider.getConfig().url() + "/greeting?name=TestName", String.class);
-       // org.junit.Assert.assertEquals(expectedResult,forEntity);
-
     }
 }

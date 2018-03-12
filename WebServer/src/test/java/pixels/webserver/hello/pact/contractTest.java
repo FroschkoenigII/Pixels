@@ -17,7 +17,7 @@ import pixels.webserver.hello.Application;
 
 @RunWith(PactRunner.class)
 @Provider("exampleProvider")
-@PactFolder("target/pact/contracts")
+@PactFolder("src/main/resources/contracts")
 @VerificationReports({"console", "markdown"})
 public class contractTest {
     private static ConfigurableApplicationContext application;

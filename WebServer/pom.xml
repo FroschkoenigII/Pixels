@@ -68,6 +68,7 @@
 						<serviceProvider>
 							<name>exampleProvider</name>
 							<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
+							<projectVersion>1.0.0</projectVersion>
 						</serviceProvider>
 					</serviceProviders>
 				</configuration>

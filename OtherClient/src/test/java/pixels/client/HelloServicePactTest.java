@@ -19,7 +19,7 @@ public class HelloServicePactTest {
 	@Rule
     public PactProviderRuleMk2  provider = new PactProviderRuleMk2("exampleProvider","localhost",8020,this);
 	
-	@Pact(provider = "exampleProvider", consumer = "ConsumerA")
+	@Pact(provider = "exampleProvider", consumer = "ConsumerB")
     public RequestResponsePact createPact(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
         headers.put("content-type", "text/plain");

@@ -48,9 +48,9 @@
 				<version>3.5.12</version>
 				<configuration>
 					<pactDirectory>${project.build.directory}\pacts</pactDirectory>
-					<projectVersion>1.3.5</projectVersion>
+					<projectVersion>1.0.0</projectVersion>
 					<tags>
-						<tag>BugFixTag</tag>
+						<tag>Masterr</tag>
 					</tags>
 					<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
 					<trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->

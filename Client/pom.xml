@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>au.com.dius</groupId>
 			<artifactId>pact-jvm-consumer-junit_2.12</artifactId>
-			<version>3.5.11</version>
+			<version>3.5.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,9 +45,13 @@
 			<plugin>
 				<groupId>au.com.dius</groupId>
 				<artifactId>pact-jvm-provider-maven_2.12</artifactId>
-				<version>3.5.11</version>
+				<version>3.5.12</version>
 				<configuration>
 					<pactDirectory>${project.build.directory}\pacts</pactDirectory>
+					<projectVersion>1.3.5</projectVersion>
+					<tags>
+						<tag>BugFixTag</tag>
+					</tags>
 					<pactBrokerUrl>http://localhost:80</pactBrokerUrl>
 					<trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->
 				</configuration>

@@ -32,7 +32,7 @@ public class HelloServicePactTest {
                 .willRespondWith()
                 .status(200)
                 .headers(headers)
-                .body("Greetings from Spring Boot!")
+                .body("Greetings from Spring Boot!!!!")
                 .toPact();
     }
 	
@@ -41,7 +41,7 @@ public class HelloServicePactTest {
     public void runTest() throws IOException {
         final RestTemplate call = new RestTemplate();
         //final Greeting expectedResponse = new Greeting(1, "Hello, sven!");
-        String expectedResult = "Greetings from Spring Boot!";
+        String expectedResult = "Greetings from Spring Boot!!!!";
         final String forEntity = call.getForObject(provider.getConfig().url() + "/", String.class);
         org.junit.Assert.assertEquals(expectedResult,forEntity);
 

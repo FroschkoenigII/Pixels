@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/pixels/application/Application.java=UTF-8
+encoding//src/main/java/pixels/application/HelloWorldController.java=UTF-8
+encoding//src/main/java/pixels/examples/helloWorld/HelloWorld.java=UTF-8
+encoding/pom.xml=UTF-8

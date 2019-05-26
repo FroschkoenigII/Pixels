@@ -1,4 +1,4 @@
-package pixels.examples.helloWorld;
+package pixels.application;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

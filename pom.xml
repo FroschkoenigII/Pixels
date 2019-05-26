@@ -8,9 +8,6 @@
 	<version>0.1.0</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>WebServer</module>
-
-		<module>Client</module>
 		<module>PixelsFreshStart</module>
 	</modules>	
 	<build>

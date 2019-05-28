@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo SCRIPT STARTING
+echo Killing old Run 
+
+pid=`ps aux | grep PixelsFreshStart | awk '{print $2}'`
+kill -9 $pid
+
+echo Starting new Run
 
 BUILD_ID=dontKillMe
 

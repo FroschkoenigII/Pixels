@@ -34,7 +34,8 @@ pipeline {
             steps {
                 echo 'Starting....'
                 sh 'pwd'
-                sh 'sudo ./executeScript.sh'
+                sh 'chmod 777 executeScript.sh'
+                sh './executeScript.sh'
             }
         }
     }

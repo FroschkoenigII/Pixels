@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
+	@RequestMapping("/")
+	public String backup() {
+		return "Server is running. Please try different URL 2";
+	}
+
 	@RequestMapping("/greeting")
 	public String greeting() {
 		return "Julija number One";

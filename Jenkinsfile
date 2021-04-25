@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo 'Starting....'
                 sh 'pwd'
-                sh 'java -jar PixelsFreshStart/target/PixelsFreshStart-0.1.0.jar &'
+                sh './executeScript.sh'
             }
         }
     }

@@ -4,4 +4,4 @@ echo Killing $pid
 kill -9 $pid
 echo Starting new Run
 JENKINS_NODE_COOKIE=dontKillMe
-sudo java -jar PixelsFreshStart/target/PixelsFreshStart-0.1.0.jar &
+java -jar PixelsFreshStart/target/PixelsFreshStart-0.1.0.jar &

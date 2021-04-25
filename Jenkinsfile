@@ -19,20 +19,21 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
                 
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('Stop') {
             steps {
-                echo 'Deploying....'
+                echo 'Stopping....'
+            }
+        }
+        stage('Start') {
+            steps {
+                echo 'Starting....'
+                sh 'java -jar PixelsFreshStart/target/PixelsFreshStart-0.1.0.jar &'
             }
         }
     }

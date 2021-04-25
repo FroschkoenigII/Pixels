@@ -8,11 +8,11 @@ public class HelloWorldController {
 
 	@RequestMapping("/")
 	public String backup() {
-		return "Server is running. Please try different URL 2";
+		return "Server is running. Please try different URL";
 	}
 
 	@RequestMapping("/greeting")
 	public String greeting() {
-		return "Julija number One1";
+		return "Julija number One";
 	}
 }
